@@ -1,0 +1,34 @@
+def user_pin_code_valid(pincode):
+    count = 0
+    while count < 3:
+        user_pin_code = int(input('What is your pin code? ({} attempts remaining) '.format(3 - count)))
+        count += 1
+        if user_pin_code == pincode:
+            return True
+    return False
+
+def calculate_new_balance(account_balance):
+    user_withdrawal_amount = int(input('How much would you like to withdraw? '))
+    if user_withdrawal_amount > account_balance:
+        return False
+    else:
+        new_balance = account_balance - user_withdrawal_amount
+        return new_balance
+
+
+print('Welcome to the ATM!')
+pincode = 1234
+account_balance = 100
+
+
+is_user_valid = user_pin_code_valid(pincode)
+if not is_user_valid:
+    print('You have used your maximum amount of attempts. Your card is now locked.')
+    exit(0)
+
+new_balance = calculate_new_balance(account_balance)
+if not new_balance:
+    print('You have insufficient funds')
+    exit(0)
+
+print('Thank you for your withdrawal. Your new balance is £{}.'.format(new_balance))
